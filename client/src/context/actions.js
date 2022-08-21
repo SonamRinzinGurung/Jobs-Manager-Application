@@ -1,0 +1,10 @@
+export const DISPLAY_ALERT = "SHOW_ALERT";
+export const CLEAR_ALERT = "CLEAR_ALERT";
+
+export const AUTH_USER_BEGIN = "AUTH_USER_BEGIN";
+export const AUTH_USER_SUCCESS = "AUTH_USER_SUCCESS";
+export const AUTH_USER_ERROR = "AUTH_USER_ERROR";
+
+export const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR";
+
+export const LOGOUT_USER = "LOGOUT_USER";
