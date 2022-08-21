@@ -2,6 +2,11 @@ import User from "../models/User.js";
 import { StatusCodes } from "http-status-codes";
 import { BadRequestError, UnAuthenticatedError } from "../errors/index.js";
 
+/**
+ * Register user controller
+ * @param {*} req
+ * @param {*} res
+ */
 const register = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -55,7 +60,23 @@ const login = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  res.send("updateUser");
+  const { name, email, lastname, location } = req.body;
+
+  if (!name || !email || !lastname || !location) {
+    throw new BadRequestError("Please provide all the values");
+  }
+
+  const user = await User.findOne({ _id: req.user.userId });
+
+  user.name = name;
+  user.email = email;
+  user.lastname = lastname;
+  user.location = location;
+
+  await user.save();
+  const token = user.createJWT();
+
+  res.status(StatusCodes.OK).json({ user, token, location: user.location });
 };
 
 export { register, login, updateUser };
