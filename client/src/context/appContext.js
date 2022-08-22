@@ -13,6 +13,13 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
+  HANDLE_CHANGE,
+  CLEAR_VALUES,
+  CREATE_JOB_BEGIN,
+  CREATE_JOB_SUCCESS,
+  CREATE_JOB_ERROR,
+  GET_JOBS_BEGIN,
+  GET_JOBS_SUCCESS,
 } from "./actions";
 
 const token = localStorage.getItem("token");
@@ -35,8 +42,12 @@ const initialState = {
   jobLocation: userLocation || "",
   jobTypeOptions: ["full-time", "part-time", "remote", "internship"],
   jobType: "full-time",
-  statusOptions: ["interview", "pending", "declined"],
-  status: "pending,",
+  statusOptions: ["pending", "interview", "declined"],
+  status: "pending",
+  jobs: [],
+  totalJobs: 0,
+  numOfPages: 1,
+  page: 1,
 };
 
 const AppContext = React.createContext();
@@ -156,6 +167,58 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  const handleChange = ({ name, value }) => {
+    dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
+  };
+
+  const clearValues = () => {
+    dispatch({ type: CLEAR_VALUES });
+  };
+
+  const createJob = async () => {
+    dispatch({ type: CREATE_JOB_BEGIN });
+
+    try {
+      const { position, company, jobLocation, jobType, status } = state;
+      await authFetch.post("/jobs", {
+        position,
+        company,
+        jobLocation,
+        jobType,
+        status,
+      });
+      dispatch({ type: CREATE_JOB_SUCCESS });
+      clearValues();
+    } catch (error) {
+      if (error.response.status === 401) return;
+      dispatch({
+        type: CREATE_JOB_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
+    }
+    clearAlert();
+  };
+
+  const getJobs = async () => {
+    dispatch({ type: GET_JOBS_BEGIN });
+    try {
+      const { data } = await authFetch.get("/jobs");
+      const { jobs, totalJobs, numOfPages } = data;
+      dispatch({
+        type: GET_JOBS_SUCCESS,
+        payload: {
+          jobs,
+          totalJobs,
+          numOfPages,
+        },
+      });
+    } catch (error) {
+      console.log(error.response);
+      // logoutUser();
+    }
+    clearAlert();
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -165,6 +228,10 @@ const AppProvider = ({ children }) => {
         toggleSidebar,
         logoutUser,
         updateUser,
+        handleChange,
+        clearValues,
+        createJob,
+        getJobs,
       }}
     >
       {children}

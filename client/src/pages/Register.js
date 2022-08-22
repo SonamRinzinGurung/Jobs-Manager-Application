@@ -42,7 +42,7 @@ const Register = () => {
       authUser({
         currentUser,
         endPoint: "login",
-        alertText: "Login Success!! Redirecting, Please wait...",
+        alertText: "Login Successful, Redirecting, Please wait...",
       });
     } else {
       authUser({
