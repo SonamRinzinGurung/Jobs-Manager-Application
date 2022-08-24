@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Wrapper = styled.nav`
   height: var(--nav-height);
@@ -9,7 +9,6 @@ const Wrapper = styled.nav`
   .logo {
     display: flex;
     align-items: center;
-    width: 100px;
   }
   .nav-center {
     display: flex;
@@ -57,15 +56,12 @@ const Wrapper = styled.nav`
   .dropdown-btn {
     background: transparent;
     border-color: transparent;
-    color: var(--primary-500);
+    color: var(--primary-800);
     letter-spacing: var(--letterSpacing);
     text-transform: capitalize;
     cursor: pointer;
   }
-  .logo-text {
-    display: none;
-    margin: 0;
-  }
+
   @media (min-width: 992px) {
     position: sticky;
     top: 0;
@@ -73,12 +69,6 @@ const Wrapper = styled.nav`
     .nav-center {
       width: 90%;
     }
-    .logo {
-      display: none;
-    }
-    .logo-text {
-      display: block;
-    }
   }
-`
-export default Wrapper
+`;
+export default Wrapper;

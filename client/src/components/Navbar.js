@@ -1,5 +1,7 @@
 import Wrapper from "../assets/wrappers/Navbar";
-import { FaAlignLeft, FaUserCircle, FaCaretDown } from "react-icons/fa";
+import { FaAlignJustify, FaUserCircle, FaCaretDown } from "react-icons/fa";
+import { BiLogOutCircle } from "react-icons/bi";
+
 import { useAppContext } from "../context/appContext";
 import Logo from "./Logo";
 import { useState } from "react";
@@ -12,11 +14,11 @@ const Navbar = () => {
     <Wrapper>
       <div className="nav-center">
         <button type="button" className="toggle-btn" onClick={toggleSidebar}>
-          <FaAlignLeft />
+          <FaAlignJustify />
         </button>
         <div>
           <Logo />
-          <h3 className="logo-text">Dashboard</h3>
+          {/* <h3 className="logo-text">Dashboard</h3> */}
         </div>
         <div className="btn-container">
           <button
@@ -30,6 +32,7 @@ const Navbar = () => {
           </button>
           <div className={showDropdown ? "dropdown show-dropdown" : "dropdown"}>
             <button type="button" className="dropdown-btn" onClick={logoutUser}>
+              <BiLogOutCircle />
               Logout
             </button>
           </div>
