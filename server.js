@@ -1,9 +1,19 @@
 import express from "express";
 const app = express();
+
 import dotenv from "dotenv";
 dotenv.config();
+
 import "express-async-errors";
 import morgan from "morgan";
+
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+
+//security packages
+import helmet from "helmet";
+import xss from "xss-clean";
+import mongoSanitize from "express-mongo-sanitize";
 
 //database and authenticate user
 import connectToDB from "./db/connect.js";
@@ -21,17 +31,25 @@ if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
 
-app.use(express.json());
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-app.get("/", (req, res) => {
-  res.send("welcome");
-});
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+
+app.use(express.json());
+app.use(helmet()); //secure headers
+app.use(xss()); //sanitize input , prevent cross site scripting
+app.use(mongoSanitize()); //prevents mongodb operator injection
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authenticateUser, jobsRouter);
 
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
+
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
+
 const port = process.env.PORT || 5000;
 
 const start = async () => {
