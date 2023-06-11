@@ -61,6 +61,14 @@ const Register = () => {
     }
   }, [user, navigate]);
 
+  const handleFillButton = () => {
+    setValues({
+      ...values,
+      email: "sonam@gmail.com",
+      password: "secret",
+    });
+  };
+
   return (
     <Wrapper className="full-page">
       <form className="form" onSubmit={handleSubmit}>
@@ -92,6 +100,14 @@ const Register = () => {
           value={values.password}
           handleChange={handleChange}
         />
+        <button
+          type="button"
+          className="btn btn-hero"
+          disabled={isLoading}
+          onClick={handleFillButton}
+        >
+          Fill Credentials
+        </button>
         <button type="submit" className="btn btn-block" disabled={isLoading}>
           Submit
         </button>
