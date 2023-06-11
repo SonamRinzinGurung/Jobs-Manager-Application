@@ -1,41 +1,20 @@
 {
   "name": "job-manager",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "type": "module",
+  "description": "Job Management System built by using the MERN stack (MongoDB, Express, React, NodeJS).",
+  "main": "./server/server.js",
   "scripts": {
-    "build-client": "cd client && npm run build",
-    "install-client": "cd client && npm install",
-    "heroku-postbuild":"npm run install-client && npm run build-client",
-    "server": "nodemon server --ignore client",
-    "client": "npm start --prefix client",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \" npm run client\""
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd ./server && node server.js"
   },
-  "keywords": [],
-  "author": "lova",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SonamRinzinGurung/Jobs-Manager-Application.git"
+  },
+  "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^7.3.0",
-    "nodemon": "^2.0.19"
+  "bugs": {
+    "url": "https://github.com/SonamRinzinGurung/Jobs-Manager-Application/issues"
   },
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "dotenv": "^16.0.1",
-    "express": "^4.18.1",
-    "express-async-errors": "^3.1.1",
-    "express-mongo-sanitize": "^2.2.0",
-    "express-rate-limit": "^6.5.1",
-    "helmet": "^5.1.1",
-    "http-status-codes": "^2.2.0",
-    "jsonwebtoken": "^8.5.1",
-    "moment": "^2.29.4",
-    "mongoose": "^6.5.2",
-    "morgan": "^1.10.0",
-    "validator": "^13.7.0",
-    "xss-clean": "^0.1.1"
-  },
-   "engines": {
-    "node": "16.x"
-  }
+  "homepage": "https://github.com/SonamRinzinGurung/Jobs-Manager-Application#readme"
 }
