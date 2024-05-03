@@ -17,3 +17,7 @@ Project in Action - [Job Manager](https://job-manager-aikx.onrender.com)
 - Check the stats of the jobs grouped by job status
 - Bar and Area Chart to view the monthly application data
 - Change user profile data
+
+***
+#### Desktop View
+<img width="800" alt="image" src="https://res.cloudinary.com/ddr8aveca/image/upload/v1714715231/github%20storage/olrvxfzsdluyuqx5xezb.png">
